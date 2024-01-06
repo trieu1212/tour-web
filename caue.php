@@ -9,22 +9,23 @@
     <label>Số điểm du lịch đi qua</label>
     <input type="number" id='point' name='count' min='1' value='0'><br>
     <div class='kq'></div>
-    <a href="index.html">Quay về trang chủ</a>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function(){
-            $("#point").keyup(function(){
-                var count = $("#point").val()
-                $.ajax({
-                    type: 'post',
-                    url: 'xuly.php',
-                    data:{
-                        count:count
-                    },
-                    success:function(data,status){
-                        $(".kq").html(data);
-                    }
-                })
+            $("#point").keydown(function(e){
+                if(e.keyCode === 9){
+                    var count = $("#point").val()
+                    $.ajax({
+                        type: 'post',
+                        url: 'xuly.php',
+                        data:{
+                            count:count
+                        },
+                        success:function(data,status){
+                            $(".kq").html(data);
+                        }
+                    })
+                }
             })
         })
     </script>

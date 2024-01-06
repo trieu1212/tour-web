@@ -6,7 +6,7 @@
         $sql = "select tour.TenTour,count(chitiet.MaDDL) as SL
                 from tour join chitiet on tour.MaTour=chitiet.MaTour 
                 group by tour.TenTour 
-                having count(chitiet.MaDDL)=$count";
+                having count(chitiet.MaDDL)>=$count";
         $result = $con->query($sql);
         if($result){
             echo "<p>Số điểm du lịch mà các tour đi qua</p>
