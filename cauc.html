@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách điểm du lịch</title>
+</head>
+<body>
+    <h2>Danh sách điểm du lịch</h2>
+    <table border="1">
+        <tr>
+            <td>STT</td>
+            <td>Mã điểm du lịch</td>
+            <td>Tên điểm du lịch</td>
+            <td>Thành phố</td>
+            <td>Đặc trưng</td>
+            <td>Chức năng</td>
+        </tr>
+        <tbody id="dsdiemdl"></tbody>
+    </table>
+    <a href="index.html">Quay về trang chủ</a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            loaddiemdl();
+        })
+        $(document).on('click','.del',function(){
+            var MaDDL = $(this).data('maddl');
+            del(MaDDL);
+        })
+        $(document).on('click','.view',function(){
+            var MaDDL = $(this).data('maddl');
+            view(MaDDL);
+            window.location.href='view.php?MaDDL='+MaDDL;
+        })
+        function del(MADDL){
+            $.ajax({
+                type: 'post',
+                url:'xoa.php',
+                data:{MaDDL:MADDL},
+                success:function(data){
+                    loaddiemdl();
+                }
+            })
+        }
+        function view(MADDL){
+            $.ajax({
+                type: 'get',
+                url:'view.php',
+                data:{MaDDL:MADDL},
+                success:function(data){
+                }
+            })
+        }
+        function loaddiemdl(){
+            $.ajax({
+                type: 'post',
+                url: 'loaddiemdl.php',
+                success: function(data){
+                    $('#dsdiemdl').html(data);
+                }
+            })
+        }
+    </script>
+</body>
+</html>
