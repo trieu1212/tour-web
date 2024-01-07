@@ -13,7 +13,7 @@
     <script>
         $(document).ready(function(){
             $("#point").keydown(function(e){
-                if(e.keyCode === 9){
+                if(e.key == 'Tab'){
                     var count = $("#point").val()
                     $.ajax({
                         type: 'post',
